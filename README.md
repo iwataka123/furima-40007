@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :payments
+- has_many :buying_histories
 
 ## items テーブル
 
@@ -24,17 +25,22 @@
 | ------------------ | ---------- | ----------------------------- |
 | name               | string     | null: false                   |
 | explanation        | text       | null: false                   |
-| category           | string     | null: false                   |
-| status             | string     | null: false                   |
-| delivery_charge    | string     | null: false                   |
-| ship_from          | string     | null: false                   |
-| shipping_date      | string     | null: false                   |
+| category_id        | integer    | null: false                   |
+| status_id          | integer    | null: false                   |
+| delivery_charge_id | integer    | null: false                   |
+| prefectures_id     | integer    | null: false                   |
+| shipping_date_id   | integer    | null: false                   |
 | price              | integer    | null: false                   |
-| user_id            | references | null: false,foreign_key: true |
+| user               | references | null: false,foreign_key: true |
 
 ### Association
 
-- has_one :payments
+- has_one :buying_history
+- belongs_to :category
+- belongs_to :status
+- belongs_to :delivery_charge
+- belongs_to :ship_from
+- belongs_to :shipping_date
 - belongs_to :user
 
 ## payments テーブル
@@ -42,15 +48,27 @@
 | Column             | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
 | post_code          | string     | null: false                   |
-| prefectures        | string     | null: false                   |
+| prefectures_id     | string     | null: false                   |
 | municipality       | string     | null: false                   |
 | address            | string     | null: false                   |
-| building           | string     | null: false                   |
+| building           | string     |                               |
 | phone_number       | string     | null: false                   |
-| user_id            | references | null: false,foreign_key: true |
-| item_id            | references | null: false,foreign_key: true |
+
+### Association
+
+- has_many :buying_histories
+- belongs_to :prefectures_id
+
+## buying_histories テーブル
+
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| user               | references | null: false,foreign_key: true |
+| item               | references | null: false,foreign_key: true |
+| payment            | references | null: false,foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :payment
