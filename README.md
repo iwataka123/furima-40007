@@ -16,7 +16,6 @@
 ### Association
 
 - has_many :items
-- has_many :payments
 - has_many :buying_histories
 
 ## items テーブル
@@ -53,10 +52,11 @@
 | address            | string     | null: false                   |
 | building           | string     |                               |
 | phone_number       | string     | null: false                   |
+| buying_history     | references | null: false,foreign_key: true |
 
 ### Association
 
-- has_many :buying_histories
+- belongs_to :buying_history
 - belongs_to :prefectures_id
 
 ## buying_histories テーブル
@@ -65,10 +65,10 @@
 | ------------------ | ---------- | ----------------------------- |
 | user               | references | null: false,foreign_key: true |
 | item               | references | null: false,foreign_key: true |
-| payment            | references | null: false,foreign_key: true |
+| payment            | references | null: false                   |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :payment
+- has_one :payment
