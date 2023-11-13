@@ -27,7 +27,7 @@
 | category_id        | integer    | null: false                   |
 | status_id          | integer    | null: false                   |
 | delivery_charge_id | integer    | null: false                   |
-| prefectures_id     | integer    | null: false                   |
+| prefecture_id      | integer    | null: false                   |
 | shipping_date_id   | integer    | null: false                   |
 | price              | integer    | null: false                   |
 | user               | references | null: false,foreign_key: true |
@@ -38,7 +38,7 @@
 - belongs_to :category
 - belongs_to :status
 - belongs_to :delivery_charge
-- belongs_to :ship_from
+- belongs_to :prefecture
 - belongs_to :shipping_date
 - belongs_to :user
 
@@ -47,7 +47,7 @@
 | Column             | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
 | post_code          | string     | null: false                   |
-| prefectures_id     | string     | null: false                   |
+| prefecture_id      | integer    | null: false                   |
 | municipality       | string     | null: false                   |
 | address            | string     | null: false                   |
 | building           | string     |                               |
@@ -56,8 +56,8 @@
 
 ### Association
 
+- belongs_to :prefecture
 - belongs_to :buying_history
-- belongs_to :prefectures_id
 
 ## buying_histories テーブル
 
@@ -65,7 +65,6 @@
 | ------------------ | ---------- | ----------------------------- |
 | user               | references | null: false,foreign_key: true |
 | item               | references | null: false,foreign_key: true |
-| payment            | references | null: false                   |
 
 ### Association
 
