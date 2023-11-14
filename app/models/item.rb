@@ -13,7 +13,7 @@ class Item < ApplicationRecord
 
   validates :name,              presence: true
   validates :explanation,       presence: true
-  validates :price,             presence: true, numericality: { only_integer: true,in: 300..9999999 }
+  validates :price,             presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   validates :image,             presence: true
 
   with_options numericality: { other_than: 1 , message: "can't be blank"} do
