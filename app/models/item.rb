@@ -2,6 +2,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  # has_one :buying_history
+
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
