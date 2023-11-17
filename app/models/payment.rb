@@ -1,6 +1,5 @@
 class Payment < ApplicationRecord
 
-  belongs_to :prefecture
   belongs_to :buying_history
 
   extend ActiveHash::Associations::ActiveRecordExtensions

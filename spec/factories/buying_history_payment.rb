@@ -6,9 +6,5 @@ FactoryBot.define do
     address           {'ざ区'}
     phone_number      {'00000000000'}
     token             {'tok_abcdefghijk00000000000000000'}
-    buying_history {'1'}
-    user_id {'1'}
-    item_id {'1'}
-
   end
 end

@@ -2,12 +2,19 @@ require 'rails_helper'
 
 RSpec.describe BuyingHistoryPayment, type: :model do
   before do
-    @buying_history_payment = FactoryBot.build(:buying_history_payment)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user_id: user.id)
+    @buying_history_payment = FactoryBot.build(:buying_history_payment, user_id: user.id, item_id: item.id)
+    sleep(0.1)
   end
 
   describe '配送先の登録' do
     context '配送先が登録できる場合' do
       it "post_code,prefecture_id,municipality,address,building,phone_numberが存在すれば登録できる" do
+        expect(@buying_history_payment).to be_valid
+      end
+      it 'buildingが空でも登録できる' do
+        @buying_history_payment.building = ''
         expect(@buying_history_payment).to be_valid
       end
     end
@@ -146,11 +153,6 @@ RSpec.describe BuyingHistoryPayment, type: :model do
         @buying_history_payment.item_id = nil
         @buying_history_payment.valid?
         expect(@buying_history_payment.errors.full_messages).to include("Item can't be blank")
-      end
-      it 'buying_historyが空では登録できない' do
-        @buying_history_payment.buying_history = nil
-        @buying_history_payment.valid?
-        expect(@buying_history_payment.errors.full_messages).to include()
       end
     end
   end

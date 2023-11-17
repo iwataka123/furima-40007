@@ -1,23 +1,16 @@
 class BuyingHistoriesController < ApplicationController
   before_action :move_to_index
+  before_action :set_item
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @buying_history_payment = BuyingHistoryPayment.new
-    if current_user.nil?
-      redirect_to new_user_session_path
-    end
     if @item.user_id == current_user.id || @item.buying_history != nil
       redirect_to root_path
     end
   end
 
-  def new
-    @buying_history_payment = BuyingHistoryPayment.new
-  end
-
   def create
-    @item = Item.find(params[:item_id])
     @buying_history_payment = BuyingHistoryPayment.new(buying_history_params)
     if current_user.id == @item.user_id
       redirect_to root_path
@@ -34,9 +27,13 @@ class BuyingHistoriesController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def move_to_index
     unless user_signed_in?
-      redirect_to user_session_path
+      redirect_to new_user_session_path
     end
   end
 
