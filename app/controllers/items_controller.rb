@@ -24,14 +24,13 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.buying_history != nil
+      redirect_to root_path
+    end
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to item_path(@item.id)
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    
   end
 
   def destroy
