@@ -1,5 +1,5 @@
-function calc (){
-  const priceInput = document.getElementById("item-price");
+window.addEventListener('turbo:load', () => {
+const priceInput = document.getElementById("item-price");
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
     const addTaxDom = document.getElementById("add-tax-price");
@@ -7,6 +7,4 @@ function calc (){
     const addProfit = document.getElementById("profit");
     addProfit.innerHTML = Math.floor(inputValue - addTaxDom.innerHTML);
   });
-};
-
-window.addEventListener('load', calc)
+})
